@@ -28,4 +28,8 @@ Rscript retrieve_data.R plantgrainPhenotypes.txt rice_group.reference PH
 wget https://datadryad.org/bitstream/handle/10255/dryad.77584/UCD_2014.tfam
 wget https://datadryad.org/bitstream/handle/10255/dryad.77585/UCD_2014.tped
 
+## prep phenotypes
+Rscript --vanilla prep_dogpheno.R UCD_2014.tfam
+
+## subset genotypes
 ~/Downloads/plink --dog --tfile UCD_2014 --chr 25,26,27,28,29 --recode transpose --out dogs
