@@ -93,13 +93,13 @@ impute_genotypes <- function(ped_file,dist_matrix,k=3) {
     
     print(paste("SNP n.",i,sep=" "))
     X <- ped_file[,-i] #global matrix of features (train + test sets)
-    y <- ped_file[,i]
+    y <- as.character(ped_file[,i])
     names(y) <- samples
     k <- k
     
     if(sum(is.na(y))<1) {
       
-      imputedM[,i] <- y
+      imputedM[,i] <- as.character(y)
     } else {
       
       yy <- outer(y,y,FUN=function(x,z) as.integer(ifelse(is.na(x==z),FALSE,x!=z)))
@@ -133,7 +133,7 @@ impute_genotypes <- function(ped_file,dist_matrix,k=3) {
         y[testIDS] <- pred
       }
       
-      imputedM[,i] <- y
+      imputedM[,i] <- as.character(y)
     }
   }
   
@@ -141,7 +141,7 @@ impute_genotypes <- function(ped_file,dist_matrix,k=3) {
   M <- cbind.data.frame(imputedM,"GROUP"=groups)
   rownames(M) <- samples
   
-  write.table(M,file="imputedM.csv",col.names=TRUE,row.names=FALSE,quote=FALSE,sep=",")
+  # write.table(M,file="imputedM.csv",col.names=TRUE,row.names=FALSE,quote=FALSE,sep=",")
   
   return(M)
 }
@@ -153,9 +153,26 @@ library("dplyr")
 library("ggplot2")#]]
 library("data.table")
 
+## run as: Rscript --vanilla knni.R dogs_chr25.ped
+
+## read from command line
+args = commandArgs(trailingOnly=TRUE)
+
+# test if there is at least one argument: if not, return an error
+if (length(args)==0) {
+  stop("At least one argument must be supplied (input file).n", call.=FALSE)
+}
+
+# phenotype_file = "plantgrainPhenotypes.txt"
+# group_reference_file = "rice_group.reference"
+# trait = "PH"
+
+ped_file= args[1]
+print(paste("phenotype file name:",ped_file))
+
 #"READ IN THE DATA"
-M <- fread("~/Dropbox/cursos/berlin2018/data/rice_reduced.ped")
-M <- fread("/home/ubuntu/data/rice_reduced.ped")
+M <- fread(ped_file)
+# M <- fread("/home/ubuntu/data/rice_reduced.ped")
 M[M==0] <- NA
 M0 <- M[,.(V1,V2)]
 names(M0) <- c("GROUP","ID")
@@ -180,7 +197,9 @@ load("hamming.RData") ## load pre-calculated Hamming distances
 rescaled_D <- rescale_D(D)
 
 ## heatmap of distance matrix
+pdf("heatmap_knni.pdf")
 heatmap(D)
+dev.off()
 
 ## MDS
 mdsD <- mdscale(D)
