@@ -39,15 +39,17 @@ rsconnect/
 *.html
 
 # Plink files
-*.ped
-*.map
-*.log
+imputation/*.ped
+imputation/*.map
+imputation/*.log
 *.nosex
-*.frq
-*.frqx
-*.lmiss
-*.imiss
+pre-processing/*.frq
+pre-processing/*.frqx
+pre-processing/*.lmiss
+pre-processing/*.imiss
 *.irem
+pre-processing/*.ped
+pre-processing/*.map
 
 # VCF files
 *.vcf
