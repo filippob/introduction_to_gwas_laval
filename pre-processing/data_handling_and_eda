@@ -47,7 +47,7 @@ cd ~/Dropbox/cursos/laval2019/temp
 
 ## summarise genotype stats
 
-- <rstudio> eda.R ## demonstration on HWE testing
+- <rstudio> eda.R ## EDA
 - <rstudio> hwe.R ## demonstration on HWE testing
 
 
@@ -55,6 +55,8 @@ cd ~/Dropbox/cursos/laval2019/temp
 ## explore_phenotypes:
 ----------------------
 
+- <rstudio> phenotypes.R ## EDA
+- <rstudio> phenotypes.Rmd ## markdown report
 
 
 ## imputation of missing genotypes

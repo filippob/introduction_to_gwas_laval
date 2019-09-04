@@ -93,13 +93,13 @@ impute_genotypes <- function(ped_file,dist_matrix,k=3) {
     
     print(paste("SNP n.",i,sep=" "))
     X <- ped_file[,-i] #global matrix of features (train + test sets)
-    y <- as.character(ped_file[,i])
+    y <- ped_file[,i]
     names(y) <- samples
     k <- k
     
     if(sum(is.na(y))<1) {
       
-      imputedM[,i] <- as.character(y)
+      imputedM[,i] <- y
     } else {
       
       yy <- outer(y,y,FUN=function(x,z) as.integer(ifelse(is.na(x==z),FALSE,x!=z)))
@@ -133,7 +133,7 @@ impute_genotypes <- function(ped_file,dist_matrix,k=3) {
         y[testIDS] <- pred
       }
       
-      imputedM[,i] <- as.character(y)
+      imputedM[,i] <- y
     }
   }
   
@@ -163,15 +163,13 @@ if (length(args)==0) {
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
 }
 
-# phenotype_file = "plantgrainPhenotypes.txt"
-# group_reference_file = "rice_group.reference"
-# trait = "PH"
+# ped_file = "dogs_chr25.ped"
 
 ped_file= args[1]
-print(paste("phenotype file name:",ped_file))
+print(paste("ped file name:",ped_file))
 
 #"READ IN THE DATA"
-M <- fread(ped_file)
+M <- fread(ped_file, stringsAsFactors = FALSE, colClasses = c("character"))
 # M <- fread("/home/ubuntu/data/rice_reduced.ped")
 M[M==0] <- NA
 M0 <- M[,.(V1,V2)]
@@ -208,7 +206,7 @@ plot_mds(mdsD,M0,dimA = "dim1", dimB = "dim2")
 dev.off()
 
 ## IMPUTATION
-impM <- impute_genotypes(ped_file = as.data.frame(M), dist_matrix = D, k = 3)
+impM <- impute_genotypes(ped_file = as.data.frame(M), dist_matrix = rescaled_D, k = 3)
 fwrite(impM,file="knn_imputed_data.csv")
 
 ## try out different k values
