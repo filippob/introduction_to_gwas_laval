@@ -1,14 +1,14 @@
 PLINK v1.90b4.6 64-bit (15 Aug 2017)
 Options in effect:
   --file ../../data/rice
-  --hardy
+  --het
   --out rice
 
 Hostname: filippo-LB
 Working directory: /home/filippo/Dropbox/cursos/laval2019/introduction_to_gwas/pre-processing
-Start time: Wed Sep  4 11:13:54 2019
+Start time: Wed Sep  4 12:15:27 2019
 
-Random number seed: 1567588434
+Random number seed: 1567592127
 15889 MB RAM detected; reserving 7944 MB for main workspace.
 Scanning .ped file... done.
 Performing single-pass .bed write (14539 variants, 151 people).
@@ -20,6 +20,8 @@ Using 1 thread (no multithreaded calculations invoked).
 Before main variant filters, 151 founders and 0 nonfounders present.
 Calculating allele frequencies... done.
 Total genotyping rate is 0.961025.
---hardy: Writing Hardy-Weinberg report (founders only) to rice.hwe ... done.
+14539 variants and 151 people pass filters and QC.
+Note: No phenotypes present.
+--het: 12374 variants scanned, report written to rice.het .
 
-End time: Wed Sep  4 11:13:54 2019
+End time: Wed Sep  4 12:15:27 2019

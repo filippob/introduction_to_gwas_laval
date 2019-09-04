@@ -17,20 +17,45 @@ cd ~/Dropbox/cursos/laval2019/temp
 ## EDA
 #################
 
+---------------------
 ## explore_genotypes:
+---------------------
+
+## allele frequency
+
 ~/Downloads/plink --file ../../data/rice --freq --out rice
 ~/Downloads/plink --file ../../data/rice --freq counts --out rice
 ~/Downloads/plink --file ../../data/rice --freqx --out rice
 
-~/Downloads/plink --dog --file ../../dogs --freq --out dogs
-~/Downloads/plink --dog --file ../../dogs --freq counts --out dogs
-~/Downloads/plink --dog --file ../../dogs --freqx --out dogs
+~/Downloads/plink --dog --file ../../data/dogs --freq --out dogs
+~/Downloads/plink --dog --file ../../data/dogs --freq counts --out dogs
+~/Downloads/plink --dog --file ../../data/dogs --freqx --out dogs
 
-      - <plink> --sheep --file sheep --freq counts --out ovis
-      - <plink> --sheep --file sheep --freqx --out ovis
-      - <plink> --sheep --file sheep --missing --out ovis
-      - <plink> --sheep --file sheep --hardy --out ovis
-      - <rstudio> hwe.R ## demonstration on HWE testing
+
+## missing rate
+
+~/Downloads/plink --file ../../data/rice --missing --out rice
+~/Downloads/plink --dog --file ../../data/dogs --missing --out dogs
+
+## Hardy-Weinberg equilibrium
+
+~/Downloads/plink --file ../../data/rice --hardy --out rice
+~/Downloads/plink --dog --file ../../data/dogs --hardy --out dogs
+
+~/Downloads/plink --file ../../data/rice --het --out rice
+
+
+## summarise genotype stats
+
+- <rstudio> eda.R ## demonstration on HWE testing
+- <rstudio> hwe.R ## demonstration on HWE testing
+
+
+----------------------
+## explore_phenotypes:
+----------------------
+
+
 
 ## imputation of missing genotypes
 
