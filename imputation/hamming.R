@@ -28,7 +28,6 @@ Hamming <- function(ssr_data) {
 args = commandArgs(trailingOnly = TRUE)
 
 ped_file= args[1]
-
 print(paste("ped file is",ped_file))
 
 ## start time
@@ -55,3 +54,5 @@ end.time <- Sys.time()
 time.taken <- end.time - start.time
 print("Total time taken below")
 print(time.taken)
+
+print("DONE!")
