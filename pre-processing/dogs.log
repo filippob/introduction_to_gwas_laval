@@ -1,0 +1,29 @@
+PLINK v1.90b4.6 64-bit (15 Aug 2017)
+Options in effect:
+  --dog
+  --file ../../data/dogs
+  --freqx
+  --out dogs
+
+Hostname: filippo-LB
+Working directory: /home/filippo/Dropbox/cursos/laval2019/introduction_to_gwas/pre-processing
+Start time: Wed Sep  4 11:30:41 2019
+
+Random number seed: 1567589441
+15889 MB RAM detected; reserving 7944 MB for main workspace.
+Scanning .ped file... done.
+Performing single-pass .bed write (17118 variants, 125 dogs).
+--file: dogs-temporary.bed + dogs-temporary.bim + dogs-temporary.fam written.
+17118 variants loaded from .bim file.
+125 dogs (0 males, 0 females, 125 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to dogs.nosex .
+125 phenotype values loaded from .fam.
+Warning: Ignoring phenotypes of missing-sex samples.  If you don't want those
+phenotypes to be ignored, use the --allow-no-sex flag.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 125 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is 0.986649.
+--freqx: Allele frequencies (founders only) written to dogs.frqx .
+
+End time: Wed Sep  4 11:30:41 2019
