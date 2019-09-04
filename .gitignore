@@ -45,6 +45,9 @@ rsconnect/
 *.nosex
 *.frq
 *.frqx
+*.lmiss
+*.imiss
+*.irem
 
 # VCF files
 *.vcf
