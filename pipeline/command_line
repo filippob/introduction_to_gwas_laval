@@ -1,6 +1,6 @@
 ## prepare the env
 
-cp ../software .
+cp -r ../software .
 cp ../gwas.R software/
-cp ../../data .
+cp -r ../../data .
 mkdir steps
