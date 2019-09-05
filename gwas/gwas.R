@@ -69,7 +69,7 @@ if ((ncol(snpMatrix)-6) != nrow(SNP_INFO)) {
 phenotypes <- fread(phenotype_file)
 print(paste(nrow(phenotypes),"records read from the phenotype file",sep=" "))
 
-phenotypes <- phenotypes[phenotypes$id %in% snpMatrix$IID,]
+phenotypes <- phenotypes[phenotypes$Accession %in% snpMatrix$IID,]
 print(paste(nrow(phenotypes),"records read from the phenotype file after alignment with genotypes",sep=" "))
 
 ## kinship matrix
