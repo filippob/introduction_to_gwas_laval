@@ -82,7 +82,7 @@ K <- gVanRaden(X)
 
 print("writing out the kinship matrix ...")
 fname = paste(dataset,".kinship",sep="")
-write.table(X, file=fname, quote = FALSE, row.names = FALSE)
+write.table(K, file=fname, quote = FALSE, row.names = FALSE)
 
 print("producing the heatmap kinship matrix ...")
 pdf(paste(dataset,"_kinship_heatmap",".pdf",sep=""))
@@ -92,7 +92,7 @@ dev.off()
 ###################
 ## Running the GWAS
 ###################
-Y <- as.matrix(phenotypes$phenotype)
+Y <- as.matrix(phenotypes[,trait, with=FALSE])
 rownames(Y) <- phenotypes$Accession
 
 print("Running GWAS ...")
