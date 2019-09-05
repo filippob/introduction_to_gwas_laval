@@ -13,7 +13,7 @@ if (length(args)==0) {
 }
 
 # phenotype_file = "plantgrainPhenotypes.txt"
-# group_reference_file = "rice_group.reference"
+# group_reference_file = "../introduction_to_gwas/cross_reference/rice_group.reference"
 # trait = "PH"
 
 phenotype_file= args[1]
@@ -37,6 +37,9 @@ print(
     sum(phenotypes$Accession %in% ref_group$id),
     sep=" ")
 )
+
+print("non-matching accessions:")
+phenotypes$Accession[!(phenotypes$Accession %in% ref_group$id)]
 
 ## add population group to phenotype file
 phenotypes$population = ref_group$population[match(phenotypes$Accession, ref_group$id)]
