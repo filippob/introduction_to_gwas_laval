@@ -6,14 +6,17 @@
 wget https://zenodo.org/record/50803/files/GBSgenotypes.tar.gz
 wget https://zenodo.org/record/50803/files/plantgrainPhenotypes.txt
 
+tar -xvzf GBSgenotypes.tar.gz
+
 wc -l GBSnew.ped
 wc -l GBSnew.map
 
+wc -l plantgrainPhenotypes.txt
 less -S plantgrainPhenotypes.txt
 
 ## retrieve group information
 ## create new phenotypes file and ids file for Plink subsetting
-Rscript retrieve_data.R plantgrainPhenotypes.txt rice_group.reference PH
+Rscript prep_rice_data.R plantgrainPhenotypes.txt rice_group.reference PH
 
 
 ## use Plink to subset data
