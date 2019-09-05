@@ -1,0 +1,6 @@
+## prepare the env
+
+cp ../software .
+cp ../gwas.R software/
+cp ../../data .
+mkdir steps
