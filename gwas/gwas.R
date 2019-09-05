@@ -93,7 +93,7 @@ dev.off()
 ## Running the GWAS
 ###################
 Y <- as.matrix(phenotypes$phenotype)
-rownames(Y) <- phenotypes$id
+rownames(Y) <- phenotypes$Accession
 
 print("Running GWAS ...")
 res <- amm_gwas(Y = Y, X = X, K = K, m = 1, use.SNP_INFO = TRUE)
