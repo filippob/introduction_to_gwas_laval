@@ -24,7 +24,8 @@ trait= args[3]
 print(paste("selected trait:",trait))
 
 
-setwd("~/Dropbox/cursos/laval2019/raw_data/")
+# setwd("~/Dropbox/cursos/laval2019/raw_data/")
+setwd("~/Share/data/")
 
 phenotypes = fread(phenotype_file)
 ref_group = fread(group_reference_file)
