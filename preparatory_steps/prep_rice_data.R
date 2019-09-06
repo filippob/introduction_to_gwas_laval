@@ -26,6 +26,7 @@ print(paste("selected trait:",trait))
 
 # setwd("~/Dropbox/cursos/laval2019/raw_data/")
 setwd("~/Share/data/")
+# setwd("~/Dropbox/cursos/laval2019/data/")
 
 phenotypes = fread(phenotype_file)
 ref_group = fread(group_reference_file)
@@ -44,6 +45,9 @@ phenotypes$Accession[!(phenotypes$Accession %in% ref_group$id)]
 
 ## add population group to phenotype file
 phenotypes$population = ref_group$population[match(phenotypes$Accession, ref_group$id)]
+
+## rename column id (from Accession) 
+names(phenotypes)[1] <- "id"
 
 ## write out new phenotype file
 fwrite(x = phenotypes[ , c("Accession", "population", eval(target)), with=FALSE],
