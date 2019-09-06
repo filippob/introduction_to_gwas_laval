@@ -48,7 +48,7 @@ phenotypes$population = ref_group$population[match(phenotypes$Accession, ref_gro
 names(phenotypes)[1] <- "id"
 
 ## write out new phenotype file
-fwrite(x = phenotypes[ , c("Accession", "population", eval(target)), with=FALSE],
+fwrite(x = phenotypes[ , c("id", "population", eval(target)), with=FALSE],
        file = "rice_phenotypes.txt", sep=" ")
 
 ## write out ids file for Plink subset
