@@ -18,10 +18,21 @@ less -S plantgrainPhenotypes.txt
 ## create new phenotypes file and ids file for Plink subsetting
 Rscript prep_rice_data.R plantgrainPhenotypes.txt rice_group.reference PH
 
+wc -l rice_phenotypes.txt
+less rice_phenotypes.txt
+
+wc -l ids
+less ids
+
+
+## this is to match ids between files
+sed -i 's/\_//g' GBSnew.ped 
+sed -i 's/a//g' GBSnew.ped
 
 ## use Plink to subset data
 ~/Downloads/plink --file GBSnew --keep ids --chr 1,2,6,7 --recode --out rice
 
+rm rice.log rice.nosex
 
 ###################################
 ## DOG DATA (binary)

@@ -19,3 +19,5 @@ library("gMatrix")
 ## GWAS and plots
 library("qqman")
 library("snpStats")
+
+install.packages("")
