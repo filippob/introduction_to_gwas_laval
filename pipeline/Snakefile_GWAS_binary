@@ -10,7 +10,7 @@ rule filter_genotypes:
         outped = "steps/dogs_filtered.ped",
         outmap = "steps/dogs_filtered.map"
     run:
-        shell("~/Downloads/plink --dog --ped {input.pedfile} --map {input.mapfile} --geno 0.05 --mind 0.2 --maf 0.05 --recode --out steps/dogs_filtered")
+        shell("plink --dog --ped {input.pedfile} --map {input.mapfile} --geno 0.05 --mind 0.2 --maf 0.05 --recode --out steps/dogs_filtered")
 	shell("sed -i 's/\_//g' {output.outped}")
 
 rule ped2vcf:
@@ -20,7 +20,7 @@ rule ped2vcf:
     output:
         "steps/dogs_filtered.vcf"
     shell:
-        "~/Downloads/plink --dog --file steps/dogs_filtered --recode vcf --out steps/dogs_filtered"
+        "plink --dog --file steps/dogs_filtered --recode vcf --out steps/dogs_filtered"
 
 rule impute_genotypes:
     input:
@@ -28,7 +28,7 @@ rule impute_genotypes:
     output:
         "steps/dogs_imputed.vcf.gz"
     shell:
-        "java -Xss5m -Xmx4g -jar ~/Documents/beagle4.1/beagle.27Jan18.7e1.jar gt=steps/dogs_filtered.vcf out=steps/dogs_imputed"
+        "beagle gt=steps/dogs_filtered.vcf out=steps/dogs_imputed"
 
 rule vcf2ped:
     input:
@@ -37,7 +37,7 @@ rule vcf2ped:
         "steps/dogs_imputed.ped",
 	"steps/dogs_imputed.map"
     shell:
-        "~/Downloads/plink --dog --vcf steps/dogs_imputed.vcf.gz --recode --out steps/dogs_imputed"
+        "plink --dog --vcf steps/dogs_imputed.vcf.gz --recode --out steps/dogs_imputed"
 
 rule plink_recodeA:
     input:
@@ -46,7 +46,7 @@ rule plink_recodeA:
     output:
         "steps/dogs_imputed.raw"
     shell:
-        "~/Downloads/plink --dog --file steps/dogs_imputed --recode A --out steps/dogs_imputed"
+        "plink --dog --file steps/dogs_imputed --recode A --out steps/dogs_imputed"
 
 rule gwas_kinship:
     input:
