@@ -53,4 +53,4 @@ fwrite(x = phenotypes[ , c("Accession", "population", eval(target)), with=FALSE]
 
 ## write out ids file for Plink subset
 phenotypes$fam <- rep("NF1", nrow(phenotypes))
-fwrite(x = phenotypes[, c("fam","Accession")], file = "ids", sep="\t", col.names = FALSE)
+fwrite(x = phenotypes[, c("fam","id")], file = "ids", sep="\t", col.names = FALSE)
