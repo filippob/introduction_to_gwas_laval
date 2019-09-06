@@ -69,7 +69,7 @@ if ((ncol(snpMatrix)-6) != nrow(SNP_INFO)) {
 phenotypes <- fread(phenotype_file)
 print(paste(nrow(phenotypes),"records read from the phenotype file",sep=" "))
 
-phenotypes <- phenotypes[phenotypes$Accession %in% snpMatrix$IID,]
+phenotypes <- phenotypes[phenotypes$id %in% snpMatrix$IID,]
 print(paste(nrow(phenotypes),"records read from the phenotype file after alignment with genotypes",sep=" "))
 
 ## kinship matrix
@@ -93,7 +93,7 @@ dev.off()
 ## Running the GWAS
 ###################
 Y <- as.matrix(phenotypes[,trait, with=FALSE])
-rownames(Y) <- phenotypes$Accession
+rownames(Y) <- phenotypes$id
 
 print("Running GWAS ...")
 res <- amm_gwas(Y = Y, X = X, K = K, m = 1, use.SNP_INFO = TRUE)
