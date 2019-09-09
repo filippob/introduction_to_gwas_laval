@@ -1,12 +1,26 @@
 ## install GenABEL from source
-install.packages("~/Dropbox/cursos/berlin2018/berlin2018/software/GenABEL.data_1.0.0.tar.gz", repos = NULL, type = "source")
-install.packages("~/Dropbox/cursos/berlin2018/berlin2018/software/GenABEL_1.8-0.tar.gz", repos = NULL, type = "source")
+# install.packages("~/Dropbox/cursos/berlin2018/berlin2018/software/GenABEL.data_1.0.0.tar.gz", repos = NULL, type = "source")
+# install.packages("~/Dropbox/cursos/berlin2018/berlin2018/software/GenABEL_1.8-0.tar.gz", repos = NULL, type = "source")
 
 library("knitr")
 library("dplyr")
+library("ggplot2")
 library("GenABEL")
 library("reshape2")
 setwd("~/Dropbox/cursos/berlin2018")
+
+
+### own defined functions
+qqPlot <- function(res) {
+  
+  q <- ggplot(res, aes(-log10( ppoints(length(P) )), -log10(sort(P,decreasing=F))))
+  q <- q + geom_point() +  geom_abline(intercept=0,slope=1, col="red")
+  q <- q + xlab( expression(Expected~~-log [10] (p)) ) + ylab( expression(Observed~~-log [10] (p)) ) 
+  q <- q + ggtitle("")
+  
+  return(q)
+}
+#########################
 
 # tPed = "data/sheep.tped"
 # tFam = "data/sheep.tfam"
@@ -47,12 +61,56 @@ heatmap(K,col=rev(heat.colors(75)))
 phdata(df1)
 gtdata(df1)@chromosome
 
+## GWAS model without accounting for population structure
+
+data2.qt <- qtscore(phenotype, data = df1, trait="gaussian")
+lambda(data2.qt)
+plot(data2.qt, df="Pc1df",col = c("red", "slateblue"),pch = 19, cex = .5, main="trait")
+descriptives.scan(data2.qt,top=10)
+
+res <- results(data2.qt)
+res$SNP <- rownames(res)
+res <- res[,c("SNP","Chromosome","Position","Pc1df")]
+names(res) <- c("SNP","CHR","BP","P")
+res$CHR <- as.integer(as.character(res$CHR))
+row.names(res) <- NULL
+qqPlot(res)
+
+
+## Use of the kinship matrix to model population structure
 h2a <- polygenic(phenotype,data=df1,kin=K,trait.type = "gaussian")
 df.mm <- mmscore(h2a,df1)
 descriptives.scan(df.mm,top=100)
 plot(df.mm,col = c("red", "slateblue"),pch = 19, cex = .5, main="phenotype")
 
+lambda(df.mm)$estimate
+res <- results(df.mm)
+res$SNP <- rownames(res)
+res <- res[,c("SNP","Chromosome","Position","Pc1df")]
+names(res) <- c("SNP","CHR","BP","P")
+res$CHR <- as.integer(as.character(res$CHR))
+row.names(res) <- NULL
+qqPlot(res)
+
+## Use of principal components to model population structure
+
+df.mm  <- egscore(phdata(df1)$phenotype,data=df1,kin=K)
+plot(df.mm,col = c("red", "slateblue"),pch = 19, cex = .5, main="trait")
+descriptives.scan(df.mm,top=10)
+
+lambda(df.mm)$estimate
+res <- results(df.mm)
+res$SNP <- rownames(res)
+res <- res[,c("SNP","Chromosome","Position","Pc1df")]
+names(res) <- c("SNP","CHR","BP","P")
+res$CHR <- as.integer(as.character(res$CHR))
+row.names(res) <- NULL
+qqPlot(res)
+
+###################
 ## binary phenotype
+###################
+
 setwd("~/Dropbox/cursos/laval2019/alternatives_to_GenABEL/data/")
 tPed = "dogs.tped"
 tFam = "dogs.tfam"
@@ -102,4 +160,27 @@ h2a <- polygenic(phenotype,data=df1,kin=K,trait.type = "binomial",llfun = "polyl
 df.mm <- mmscore(h2a,df1)
 descriptives.scan(df.mm,top=100)
 plot(df.mm,col = c("red", "slateblue"),pch = 19, cex = .5, main="phenotype")
+lambda(df.mm)$estimate
 
+res <- results(df.mm)
+res$SNP <- rownames(res)
+res <- res[,c("SNP","Chromosome","Position","Pc1df")]
+names(res) <- c("SNP","CHR","BP","P")
+res$CHR <- as.integer(as.character(res$CHR))
+row.names(res) <- NULL
+qqPlot(res)
+
+## Use of principal components to model population structure
+
+df.mm  <- egscore(phdata(df1)$phenotype,data=df1,kin=K)
+plot(df.mm,col = c("red", "slateblue"),pch = 19, cex = .5, main="trait")
+descriptives.scan(df.mm,top=10)
+
+lambda(df.mm)$estimate
+res <- results(df.mm)
+res$SNP <- rownames(res)
+res <- res[,c("SNP","Chromosome","Position","Pc1df")]
+names(res) <- c("SNP","CHR","BP","P")
+res$CHR <- as.integer(as.character(res$CHR))
+row.names(res) <- NULL
+qqPlot(res)

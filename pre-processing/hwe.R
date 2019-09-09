@@ -17,6 +17,9 @@ nBB <- 5
 nA <- 2*nAA+nAB
 nB <- 2*nBB+nAB
 
+nA/sum(nA,nB) # p
+nB/sum(nA,nB) # q
+
 #sample size
 N <- sum(nAA,nAB,nBB)
 

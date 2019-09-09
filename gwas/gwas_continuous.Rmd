@@ -2,7 +2,9 @@
 title: "GWAS - continuous trait"
 author: "Filippo Biscarini"
 date: "September 9, 2019"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 bibliography: gwas.bib
 ---
 
@@ -16,7 +18,7 @@ library("ggplot2")
 library("snpStats")
 # library("doParallel")
 
-source("software/GWASfunction.R")
+source("../software/GWASfunction.R")
 
 ### own defined functions
 qqPlot <- function(res) {
@@ -40,10 +42,8 @@ We use plant height (PH) from rice data published by @biscarini2016genome:
 #### Genotypes
 
 ```{r data, echo=TRUE}
-setwd("~/Dropbox/cursos/laval2019/GWAS/")
-
 ## Prepare data
-pathD <- paste("steps/rice_imputed", c(".bed", ".bim", ".fam"), sep = "")
+pathD <- paste("../imputation/rice_imputed", c(".bed", ".bim", ".fam"), sep = "")
 genotypes <- read.plink(pathD[1], pathD[2], pathD[3])
 
 map <- genotypes$map
@@ -56,8 +56,8 @@ N. **`r nrow(map)` SNPs** from **`r nrow(genotypes$genotypes)` rice samples**. S
 
 ```{r, echo=TRUE}
 ## phenotypes
-phenotypes = read.table("../data/rice_phenotypes.txt", header = TRUE)
-names(phenotypes) <- c("id", "population", "PH", "sex")
+phenotypes = read.table("../../data/rice_phenotypes.txt", header = TRUE)
+names(phenotypes) <- c("id", "population", "PH")
 ```
 
 Plant height (PH) was recorded on `r nrow(phenotypes)` rice samples. Genotype records and phenotype records need in the first place to be aligned:
@@ -73,10 +73,10 @@ Data (both phenotypes and genotypes) are then saved to an object of class
 
 ```{r, echo=TRUE}
 genData = list(SNP=genotypes$genotypes, MAP=map, PHENOTYPES=phenotypes)
-save(genData, file = "steps/genData_continuous.RData")
+save(genData, file = "genData_continuous.RData")
 
 ### analysis
-load("steps/genData_continuous.RData")
+load("genData_continuous.RData")
 ```
 
 Below the distribution of phenotypes (PH) after alignment to genotypes:
