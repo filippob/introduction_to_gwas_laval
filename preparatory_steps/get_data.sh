@@ -30,7 +30,7 @@ sed -i 's/\_//g' GBSnew.ped
 sed -i 's/a//g' GBSnew.ped
 
 ## use Plink to subset data
-~/Downloads/plink --file GBSnew --keep ids --chr 1,2,6,7 --recode --out rice
+plink --file GBSnew --keep ids --chr 1,2,6,7 --recode --out rice
 
 rm rice.log rice.nosex
 
