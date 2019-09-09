@@ -16,7 +16,7 @@ library("ggplot2")
 library("snpStats")
 library("doParallel")
 
-source("software/GWASfunction.R")
+source("../software/GWASfunction.R")
 ```
 
 ## GWAS for a binary trait
@@ -28,10 +28,10 @@ From Wolf et al. @wolf2015genome, data on cleft lip (affected / unaffected) in d
 #### Genotypes
 
 ```{r data, echo=TRUE}
-setwd("~/Dropbox/cursos/laval2019/GWAS/")
+setwd("~/Dropbox/cursos/laval2019/introduction_to_gwas/")
 
 ## Prepare data
-pathD <- paste("steps/dogs_imputed", c(".bed", ".bim", ".fam"), sep = "")
+pathD <- paste("../imputation/dogs_imputed", c(".bed", ".bim", ".fam"), sep = "")
 genotypes <- read.plink(pathD[1], pathD[2], pathD[3])
 
 map <- genotypes$map
@@ -44,7 +44,7 @@ N. **`r nrow(map)` SNPs** from **`r nrow(genotypes$genotypes)` dog samples**. SN
 
 ```{r, echo=TRUE}
 ## phenotypes
-phenotypes = read.table("../data/dogs_phenotypes.txt", header = TRUE)
+phenotypes = read.table("../../data/dogs_phenotypes.txt", header = TRUE)
 names(phenotypes) <- c("id", "population", "condition", "sex")
 ```
 
