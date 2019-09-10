@@ -16,9 +16,9 @@ vcftools --vcf dogs.vcf --plink --out dogs_plink
 ## EDA
 #################
 
----------------------
+#---------------------
 ## explore_genotypes:
----------------------
+#---------------------
 
 ## allele frequency
 
@@ -50,9 +50,9 @@ plink --file ../../data/rice --het --out rice
 # - <rstudio> hwe.R ## demonstration on HWE testing
 
 
-----------------------
+#----------------------
 ## explore_phenotypes:
-----------------------
+#----------------------
 
 # - <rstudio> phenotypes.R ## EDA
 # - <rstudio> phenotypes.Rmd ## markdown report
