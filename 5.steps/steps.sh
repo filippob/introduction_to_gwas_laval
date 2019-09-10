@@ -1,3 +1,4 @@
+#!/bin/bash
 ###################################################
 ## here we perform GWAS steps outside of a pipeline
 ###################################################
@@ -47,4 +48,3 @@ plink --dog --file dogs_imputed --recode A --out dog_imputed
 ## GWAS
 Rscript --vanilla ../4.gwas/gwas.R genotype_file=rice_imputed.raw snp_map=rice_imputed.map phenotype_file=../data/rice_phenotypes.txt trait=PH trait_label=PH
 Rscript --vanilla ../4.gwas/gwas.R genotype_file=dogs_imputed.raw snp_map=dogs_imputed.map phenotype_file=../data/dogs_phenotypes.txt trait=phenotype trait_label=cleft_lip
-

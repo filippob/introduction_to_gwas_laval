@@ -1,3 +1,4 @@
+#!/bin/bash
 ###################################
 ## RICE DATA (continuous)
 ###################################
@@ -53,4 +54,3 @@ Rscript --vanilla ../1.preparatory_steps/prep_dogpheno.R UCD_2014.tfam
 
 ## subset genotypes
 plink --dog --tfile UCD_2014 --chr 25,26,27,28,29 --recode --out dogs
-

@@ -1,3 +1,4 @@
+#!/bin/bash
 ## prepare the env
 
 cp -r ../software .
