@@ -3,14 +3,18 @@
 #############################################
 
 ## basic Plink commands
-plink --dog --file ~/Dropbox/cursos/laval2019/data/dogs --recode vcf --out dogs
-plink --dog --file ~/Dropbox/cursos/laval2019/data/dogs --recode vcf-iid --out dogs
+
+cd ../../data
+plink --dog --file dogs --recode vcf --out dogs
+plink --dog --file dogs --recode vcf-iid --out dogs
 
 ## basic vcftools commands
 vcftools --vcf dogs.vcf --plink --out dogs_plink
 
 ## exercise: try out the basic commands with the rice dataset, too
 
+
+cd ../introduction_to_gwas/2.pre-processing
 
 #################
 ## EDA
