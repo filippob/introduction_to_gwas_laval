@@ -14,7 +14,7 @@ vcftools --vcf dogs.vcf --plink --out dogs_plink
 ## exercise: try out the basic commands with the rice dataset, too
 
 
-cd ../introduction_to_gwas/2.pre-processing
+cd ../2.pre-processing
 
 #################
 ## EDA
@@ -67,5 +67,3 @@ plink --file ../data/rice --het --out rice
 
 # - <rstudio> phenotypes.R ## EDA
 # - <rstudio> phenotypes.Rmd ## markdown report
-
-

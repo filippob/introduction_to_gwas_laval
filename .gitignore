@@ -55,3 +55,5 @@ pre-processing/*.map
 *.vcf
 *.vcf.gz
 
+data/*
+
