@@ -5,9 +5,8 @@
 ## command lines (and instruction) for data filtering, imputation and preparation (for GWAS)
 
 ## filtering genotype data
-plink --file ../../data/rice --geno 0.05 --mind 0.2 --maf 0.05 --recode --out rice_filtered
-plink --dog --file ../../data/dogs --geno 0.05 --mind 0.2 --maf 0.05 --recode --out dogs_filtered
-
+plink --file ../data/rice --geno 0.05 --mind 0.2 --maf 0.05 --recode --out rice_filtered
+plink --dog --file ../data/dogs --geno 0.05 --mind 0.2 --maf 0.05 --recode --out dogs_filtered
 
 #########################
 ## IMPUTATION
@@ -38,7 +37,6 @@ beagle gt=dogs_filtered.vcf out=dogs_imputed
 plink  --vcf rice_imputed.vcf.gz --recode --out rice_imputed
 plink --dog --vcf dogs_imputed.vcf.gz --recode --out dogs_imputed
 
-
 ## prepare data for GWAS (basic model and PC's)
 plink --file rice_imputed --make-bed --out rice_imputed
 plink --dog --file dogs_imputed --make-bed --out dogs_imputed
@@ -47,6 +45,3 @@ plink --dog --file dogs_imputed --make-bed --out dogs_imputed
 ## prepare data for GWAS (Arthur Korte)
 plink --file rice_imputed --recode A --out rice_imputed
 plink --dog --file dogs_imputed --recode A --out dogs_imputed
-
-
-

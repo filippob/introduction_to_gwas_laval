@@ -13,7 +13,6 @@ vcftools --vcf dogs.vcf --plink --out dogs_plink
 
 ## exercise: try out the basic commands with the rice dataset, too
 
-
 cd ../2.pre-processing
 
 #################

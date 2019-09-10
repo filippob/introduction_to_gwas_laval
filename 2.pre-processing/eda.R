@@ -7,6 +7,7 @@ library("data.table")
 ## ALLELE FREQUENCY
 
 rice.frq <- fread("rice.frq")
+rice.frq = na.omit(rice.frq)
 
 rice.frq %>%
   summarise(avg_frq=mean(MAF), std_dev=sd(MAF), max_frq=max(MAF), min_frq=min(MAF))

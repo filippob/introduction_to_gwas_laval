@@ -56,4 +56,21 @@ pre-processing/*.map
 *.vcf.gz
 
 data/*
-
+*.log
+*.map
+*.ped
+*.swp
+*.pdf
+*.frq
+*.frqx
+*.counts
+*.bed
+*.bim
+*.fam
+*.hwe
+*.imiss
+*.lmiss
+*.strat
+*.raw
+*.het
+*.frq.cc
