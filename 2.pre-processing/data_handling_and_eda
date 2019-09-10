@@ -3,12 +3,11 @@
 #############################################
 
 ## basic Plink commands
-cd ~/Dropbox/cursos/laval2019/temp
-~/Downloads/plink --dog --file ~/Dropbox/cursos/laval2019/data/dogs --recode vcf --out dogs
-~/Downloads/plink --dog --file ~/Dropbox/cursos/laval2019/data/dogs --recode vcf-iid --out dogs
+plink --dog --file ~/Dropbox/cursos/laval2019/data/dogs --recode vcf --out dogs
+plink --dog --file ~/Dropbox/cursos/laval2019/data/dogs --recode vcf-iid --out dogs
 
 ## basic vcftools commands
-./vcftools --vcf dogs.vcf --plink --out dogs_plink
+vcftools --vcf dogs.vcf --plink --out dogs_plink
 
 ## exercise: try out the basic commands with the rice dataset, too
 
@@ -23,63 +22,39 @@ cd ~/Dropbox/cursos/laval2019/temp
 
 ## allele frequency
 
-~/Downloads/plink --file ../../data/rice --freq --out rice
-~/Downloads/plink --file ../../data/rice --freq counts --out rice
-~/Downloads/plink --file ../../data/rice --freqx --out rice
+plink --file ../../data/rice --freq --out rice
+plink --file ../../data/rice --freq counts --out rice
+plink --file ../../data/rice --freqx --out rice
 
-~/Downloads/plink --dog --file ../../data/dogs --freq --out dogs
-~/Downloads/plink --dog --file ../../data/dogs --freq counts --out dogs
-~/Downloads/plink --dog --file ../../data/dogs --freqx --out dogs
+plink --dog --file ../../data/dogs --freq --out dogs
+plink --dog --file ../../data/dogs --freq counts --out dogs
+plink --dog --file ../../data/dogs --freqx --out dogs
 
 
 ## missing rate
 
-~/Downloads/plink --file ../../data/rice --missing --out rice
-~/Downloads/plink --dog --file ../../data/dogs --missing --out dogs
+plink --file ../../data/rice --missing --out rice
+plink --dog --file ../../data/dogs --missing --out dogs
 
 ## Hardy-Weinberg equilibrium
 
-~/Downloads/plink --file ../../data/rice --hardy --out rice
-~/Downloads/plink --dog --file ../../data/dogs --hardy --out dogs
+plink --file ../../data/rice --hardy --out rice
+plink --dog --file ../../data/dogs --hardy --out dogs
 
-~/Downloads/plink --file ../../data/rice --het --out rice
+plink --file ../../data/rice --het --out rice
 
 
 ## summarise genotype stats
 
-- <rstudio> eda.R ## EDA
-- <rstudio> hwe.R ## demonstration on HWE testing
+# - <rstudio> eda.R ## EDA
+# - <rstudio> hwe.R ## demonstration on HWE testing
 
 
 ----------------------
 ## explore_phenotypes:
 ----------------------
 
-- <rstudio> phenotypes.R ## EDA
-- <rstudio> phenotypes.Rmd ## markdown report
-
-
-## imputation of missing genotypes
-
-sed -i 's/\_//g' dogs_filtered.ped ## this is to solve the issue with multiple underscores (Plink doesn't handle it well)
-
-~/Downloads/plink --file rice_filtered --recode vcf --out rice_filtered
-~/Downloads/plink --dog --file dogs_filtered --recode vcf --out dogs_filtered
-
-java -Xss5m -Xmx4g -jar ~/Documents/beagle4.1/beagle.27Jan18.7e1.jar gt=rice_filtered.vcf out=rice_imputed
-java -Xss5m -Xmx4g -jar ~/Documents/beagle4.1/beagle.27Jan18.7e1.jar gt=dogs_filtered.vcf out=dogs_imputed
-
-~/Downloads/plink  --vcf rice_imputed.vcf.gz --recode --out rice_imputed
-~/Downloads/plink --dog --vcf dogs_imputed.vcf.gz --recode --out dogs_imputed
-
-
-## prepare data for GWAS (Reed et al.)
-~/Downloads/plink --file rice_imputed --make-bed --out rice_imputed
-~/Downloads/plink --dog --file dogs_imputed --make-bed --out dogs_imputed
-
-
-## prepare data for GWAS (Arthur Korte)
-~/Downloads/plink --file rice_imputed --recode A --out rice_imputed
-~/Downloads/plink --dog --file dogs_imputed --recode A --out dogs_imputed
+# - <rstudio> phenotypes.R ## EDA
+# - <rstudio> phenotypes.Rmd ## markdown report
 
 

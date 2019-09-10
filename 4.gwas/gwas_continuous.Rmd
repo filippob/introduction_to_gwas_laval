@@ -43,7 +43,7 @@ We use plant height (PH) from rice data published by @biscarini2016genome:
 
 ```{r data, echo=TRUE}
 ## Prepare data
-pathD <- paste("../imputation/rice_imputed", c(".bed", ".bim", ".fam"), sep = "")
+pathD <- paste("../3.imputation/rice_imputed", c(".bed", ".bim", ".fam"), sep = "")
 genotypes <- read.plink(pathD[1], pathD[2], pathD[3])
 
 map <- genotypes$map
@@ -126,7 +126,7 @@ trait_type = "gaussian"
 
 ### Execution
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
 # Conduct GWAS (will take a while)
 start <- Sys.time()
 GWAA(genodata = genData$SNP, phenodata = phenodata, family = trait_type, filename = paste(target, ".txt", sep = ""))
