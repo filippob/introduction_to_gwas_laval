@@ -19,3 +19,12 @@ library("gMatrix")
 ## GWAS and plots
 library("qqman")
 library("snpStats")
+
+install.packages("doParallel")
+install.packages("software/gMatrix_0.1.tar.gz", repos = NULL, type = "source")
+
+source("http://bioconducor.org/biocLite.R")
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install()

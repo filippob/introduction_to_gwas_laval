@@ -36,7 +36,7 @@ java -Xss5m -Xmx4g -jar ~/Documents/beagle4.1/beagle.27Jan18.7e1.jar gt=dogs_fil
 ~/Downloads/plink --dog --vcf dogs_imputed.vcf.gz --recode --out dogs_imputed
 
 
-## prepare data for GWAS (Reed et al.)
+## prepare data for GWAS (basic model and PC's)
 ~/Downloads/plink --file rice_imputed --make-bed --out rice_imputed
 ~/Downloads/plink --dog --file dogs_imputed --make-bed --out dogs_imputed
 
@@ -46,8 +46,9 @@ java -Xss5m -Xmx4g -jar ~/Documents/beagle4.1/beagle.27Jan18.7e1.jar gt=dogs_fil
 ~/Downloads/plink --dog --file dogs_imputed --recode A --out dogs_imputed
 
 
+##################
 ## KNNI imputation
-
+##################
 ## Demonstration
 
 <rstudio> knni.Rmd

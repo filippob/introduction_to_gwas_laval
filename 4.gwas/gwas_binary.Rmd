@@ -1,7 +1,7 @@
 ---
-title: "GWAS - continuous trait"
+title: "GWAS - binary trait"
 author: "Filippo Biscarini"
-date: "September 9, 2019"
+date: "October 10, 2018"
 output: html_document
 bibliography: gwas.bib
 ---
@@ -14,58 +14,46 @@ library("qqman")
 library("dplyr")
 library("ggplot2")
 library("snpStats")
-# library("doParallel")
+library("doParallel")
 
-source("software/GWASfunction.R")
-
-### own defined functions
-qqPlot <- function(res) {
-  
-  q <- ggplot(res, aes(-log10( ppoints(length(P) )), -log10(sort(P,decreasing=F))))
-  q <- q + geom_point() +  geom_abline(intercept=0,slope=1, col="red")
-  q <- q + xlab( expression(Expected~~-log [10] (p)) ) + ylab( expression(Observed~~-log [10] (p)) ) 
-  q <- q + ggtitle("")
-  
-  return(q)
-}
+source("../software/GWASfunction.R")
 ```
 
-## GWAS for continuous traits
+## GWAS for a binary trait
 
-We now perform a complete GWAS analysis for a continuous trait.
-We use plant height (PH) from rice data published by @biscarini2016genome:
+From Wolf et al. @wolf2015genome, data on cleft lip (affected / unaffected) in dogs (*Nova Scotia Duck Tolling Retriever - NSDTR*) have been obtained.
 
 ### Preparing the data
 
 #### Genotypes
 
 ```{r data, echo=TRUE}
-setwd("~/Dropbox/cursos/laval2019/GWAS/")
+setwd("~/Dropbox/cursos/laval2019/introduction_to_gwas/")
 
 ## Prepare data
-pathD <- paste("steps/rice_imputed", c(".bed", ".bim", ".fam"), sep = "")
+pathD <- paste("../imputation/dogs_imputed", c(".bed", ".bim", ".fam"), sep = "")
 genotypes <- read.plink(pathD[1], pathD[2], pathD[3])
 
 map <- genotypes$map
 colnames(map) <- c("chr", "SNP", "gen.dist", "position", "A1", "A2")
 ```
 
-N. **`r nrow(map)` SNPs** from **`r nrow(genotypes$genotypes)` rice samples**. SNPs are distributed over **`r length(unique(map$chr))` chromosomes** (chr: `r unique(map$chr)`); plant samples belong to **`r length(unique(genotypes$fam$pedigree))` populations** (populations: `r unique(genotypes$fam$pedigree)`)
+N. **`r nrow(map)` SNPs** from **`r nrow(genotypes$genotypes)` dog samples**. SNPs are distributed over **`r length(unique(map$chr))` chromosomes** (chr: `r unique(map$chr)`); dog samples belong to **`r length(unique(genotypes$fam$pedigree))` population** (populations: `r unique(genotypes$fam$pedigree)`)
 
 #### Phenotypes
 
 ```{r, echo=TRUE}
 ## phenotypes
-phenotypes = read.table("../data/rice_phenotypes.txt", header = TRUE)
-names(phenotypes) <- c("id", "population", "PH", "sex")
+phenotypes = read.table("../../data/dogs_phenotypes.txt", header = TRUE)
+names(phenotypes) <- c("id", "population", "condition", "sex")
 ```
 
-Plant height (PH) was recorded on `r nrow(phenotypes)` rice samples. Genotype records and phenotype records need in the first place to be aligned:
-
+Condition status (presence/absence of cleft lip) was recorded on `r nrow(phenotypes)` dog samples. Genotype records and phenotype records need in the first place to be aligned:
 
 ```{r, echo=TRUE}
 phenotypes <- phenotypes[phenotypes$id %in% row.names(genotypes$genotypes),]
 row.names(phenotypes) <- phenotypes$id
+phenotypes$condition <- as.factor(phenotypes$condition)
 phenotypes$id <- NULL
 ```
 
@@ -73,27 +61,30 @@ Data (both phenotypes and genotypes) are then saved to an object of class
 
 ```{r, echo=TRUE}
 genData = list(SNP=genotypes$genotypes, MAP=map, PHENOTYPES=phenotypes)
-save(genData, file = "steps/genData_continuous.RData")
+save(genData, file = "steps/genData_binary.RData")
 
 ### analysis
-load("steps/genData_continuous.RData")
+load("steps/genData_binary.RData")
 ```
+
+One breed, two phenotypic categories:
+
+- **1** = cleft lip (malformation)
+- **0** = healthy (control)
 
 Below the distribution of phenotypes (PH) after alignment to genotypes:
 
 ```{r, echo=TRUE}
 D <- genData$PHENOTYPES %>%
-  group_by(population) %>%
-  summarise(N=n(), avgPH=mean(PH), stdPH=sd(PH), minPH=min(PH),
-            maxPH=max(PH))
+  group_by(condition) %>%
+  summarise(N=n())
 
 kable(D)
 ```
 
-```{r}
-p <- ggplot(genData$PHENOTYPES, aes(x=PH, color=population, fill=population))
-p <- p + geom_histogram(aes(y=..density..), alpha=0.5, position="identity")
-p <- p + geom_density(alpha=.2) 
+```{r, echo=TRUE}
+p <- ggplot(genData$PHENOTYPES, aes(x=as.factor(condition), fill=as.factor(condition)))
+p <- p + geom_bar() + xlab("condition (cleft lip")
 p
 ```
 
@@ -118,10 +109,10 @@ SNPstats <- SNPstats[maf_call,]
 ```{r, echo=TRUE}
 # Choose trait for association analysis, use colnames(genData$LIP) for listing
 # NOTE: Ignore the first column of genData$LIP (gender)
-target <- "PH"
+target <- "condition"
 phenodata <- data.frame("id" = rownames(genData$PHENOTYPES),
                         "phenotype" = genData$PHENOTYPES[,target], stringsAsFactors = F)
-trait_type = "gaussian"
+trait_type = "binomial"
 ```
 
 ### Execution
@@ -160,12 +151,6 @@ manhattan(gwasResults)
 qq(gwasResults$P)
 ```
 
-Using an own-defined function:
-
-```{r, echo=TRUE}
-qqPlot(gwasResults)
-```
-
 #### Inflation factor $\lambda$
 
 ```{r, echo=TRUE}
@@ -174,5 +159,7 @@ z=qnorm(gwasResults$P/2)
 lambda = round(median(z^2,na.rm=T)/qchisq(0.5,df=1),3)
 print(lambda)
 ```
+
+
 
 ## References
