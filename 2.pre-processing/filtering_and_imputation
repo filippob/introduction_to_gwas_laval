@@ -15,15 +15,15 @@ plink --dog --file ../../data/dogs --geno 0.05 --mind 0.2 --maf 0.05 --recode --
 
 ## imputation of missing genotypes
 
-cd ../imputation
+cd ../3.imputation
 
 ## prepare rice data
-plink --file ../pre-processing/rice_filtered --recode vcf --out rice_filtered
+plink --file ../2.pre-processing/rice_filtered --recode vcf --out rice_filtered
 
 ## prepare dogs data
 ## option 1)
 
-sed -i 's/\_//g' dogs_filtered.ped ## this is to solve the issue with multiple underscores (Plink doesn't handle it well)
+sed -i 's/\_//g' ../2.pre-processing/dogs_filtered.ped ## this is to solve the issue with multiple underscores (Plink doesn't handle it well)
 plink --dog --file ../2.pre-processing/dogs_filtered --recode vcf --out dogs_filtered
 
 ## option 2) directly handle sample labels with Plink
