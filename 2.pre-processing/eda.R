@@ -99,4 +99,5 @@ p
 
 ## MISSING RATE
 
+## exercise: write R code to make your own summary tables and plots on missing-rate in the rice or dogs datasets
 
