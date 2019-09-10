@@ -4,7 +4,7 @@
 
 ## basic Plink commands
 
-cd ../../data
+cd ../data
 plink --dog --file dogs --recode vcf --out dogs
 plink --dog --file dogs --recode vcf-iid --out dogs
 
@@ -26,33 +26,33 @@ cd ../introduction_to_gwas/2.pre-processing
 
 ## allele frequency
 
-plink --file ../../data/rice --freq --out rice
-plink --file ../../data/rice --freq counts --out rice
-plink --file ../../data/rice --freqx --out rice
+plink --file ../data/rice --freq --out rice
+plink --file ../data/rice --freq counts --out rice
+plink --file ../data/rice --freqx --out rice
 
-plink --dog --file ../../data/dogs --freq --out dogs
-plink --dog --file ../../data/dogs --freq counts --out dogs
-plink --dog --file ../../data/dogs --freqx --out dogs
+plink --dog --file ../data/dogs --freq --out dogs
+plink --dog --file ../data/dogs --freq counts --out dogs
+plink --dog --file ../data/dogs --freqx --out dogs
 
 
 ## stratified allele frequencies
 
-plink --file ../../data/rice --update-ids update.ids --recode --out rice_pop
+plink --file ../data/rice --update-ids update.ids --recode --out rice_pop
 plink --file rice_pop --freq --family --out rice_pop ## frequency by population
-plink --dog --file ../../data/dogs --freq case-control --allow-no-sex --out dogs
+plink --dog --file ../data/dogs --freq case-control --allow-no-sex --out dogs
 
 
 ## missing rate
 
-plink --file ../../data/rice --missing --out rice
-plink --dog --file ../../data/dogs --missing --out dogs
+plink --file ../data/rice --missing --out rice
+plink --dog --file ../data/dogs --missing --out dogs
 
 ## Hardy-Weinberg equilibrium
 
-plink --file ../../data/rice --hardy --out rice
-plink --dog --file ../../data/dogs --hardy --out dogs
+plink --file ../data/rice --hardy --out rice
+plink --dog --file ../data/dogs --hardy --out dogs
 
-plink --file ../../data/rice --het --out rice
+plink --file ../data/rice --het --out rice
 
 
 ## summarise genotype stats
