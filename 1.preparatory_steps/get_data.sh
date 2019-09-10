@@ -3,6 +3,7 @@
 ###################################
 
 ## Download data (rice, continuous)
+
 wget https://zenodo.org/record/50803/files/GBSgenotypes.tar.gz
 wget https://zenodo.org/record/50803/files/plantgrainPhenotypes.txt
 
