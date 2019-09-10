@@ -3,7 +3,6 @@ library("ggplot2")
 library("reshape2")
 library("data.table")
 
-setwd("pre-processing/")
 
 ## ALLELE FREQUENCY
 

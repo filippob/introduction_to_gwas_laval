@@ -31,6 +31,13 @@ plink --dog --file ../../data/dogs --freq counts --out dogs
 plink --dog --file ../../data/dogs --freqx --out dogs
 
 
+## stratified allele frequencies
+
+plink --file ../../raw_data/rice --update-ids update.ids --recode --out rice_pop
+plink --file rice_pop --freq --family --out rice ## frequency by population
+plink --dog --file ../../data/dogs --freq case-control --allow-no-sex --out dogs
+
+
 ## missing rate
 
 plink --file ../../data/rice --missing --out rice
