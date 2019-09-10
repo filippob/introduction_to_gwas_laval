@@ -37,7 +37,8 @@ fwrite(x = rice_crossref, file = "update.ids", col.names = FALSE, sep = "\t")
 ## ~/Downloads/plink --file ../../raw_data/rice --update-ids update.ids --recode --out rice_pop
 ## ~/Downloads/plink --file rice_pop --freq --family --out rice ## frequency by population
 
-rice.frq <- fread("rice.frq.strat")
+rice.frq <- fread("rice_pop.frq.strat")
+trait_label = "disease"
 rice.frq %>%
   group_by(CLST) %>%
   summarise(avg_frq=mean(MAF), std_dev=sd(MAF), max_frq=max(MAF), min_frq=min(MAF))
