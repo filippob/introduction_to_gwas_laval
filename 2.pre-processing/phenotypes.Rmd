@@ -24,11 +24,9 @@ An example is **plant height** (**PH**) from the rice (*Oryza sativa*) dataset.
 In a continuos trait, one first looks at summary statistics: average value, standard deviation, minimum and maximum value: 
 
 ```{r cars, echo=FALSE}
-### set path
-setwd("~/Dropbox/cursos/laval2019/introduction_to_gwas/pre-processing/")
-
 ### Continuous trait
 pheno_continuous <- read.table("../../data/rice_phenotypes.txt", header = TRUE)
+names(pheno_continuous)[3] <- "phenotype"
 
 D <- pheno_continuous %>%
   group_by(population) %>%
@@ -71,7 +69,7 @@ And add histograms
 ```{r}
 p <- ggplot(pheno_continuous, aes(x=phenotype, color=population, fill=population))
 p <- p + geom_histogram(aes(y=..density..), alpha=0.5, position="identity")
-p <- p + geom_density(alpha=.2) 
+p <- p + geom_density(alpha=.2) + xlab("plant height")
 p
 ```
 
@@ -91,7 +89,6 @@ For instance, the distribution of cases and controls overall and per covariable 
 Here we see we have three classes: one is unknown status, which we will remove when filtering phenotypic data before GWAS.
 
 ```{r binary, echo=FALSE}
-setwd("~/Dropbox/cursos/laval2019/introduction_to_gwas/pre-processing/")
 pheno_binary <- read.table("../../data/dogs_phenotypes.txt", header = TRUE)
 
 D <- pheno_binary %>%
@@ -107,6 +104,7 @@ Barplot of phenotype categories:
 ```{r pressure, echo=FALSE}
 pheno_binary$phenotype <- as.factor(pheno_binary$phenotype)
 p <- ggplot(pheno_binary, aes(x=phenotype)) + geom_bar(aes(fill=phenotype))
+p <- p + xlab("malformation")
 p
 ```
 
