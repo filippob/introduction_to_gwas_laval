@@ -2,9 +2,6 @@ library("tidyr")
 library("dplyr")
 library("ggplot2")
 
-### set path
-setwd("~/Dropbox/cursos/laval2019/introduction_to_gwas/pre-processing/")
-
 ### Continuous trait
 pheno_continuous <- read.table("../../data/rice_phenotypes.txt", header = TRUE)
 

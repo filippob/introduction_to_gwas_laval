@@ -16,10 +16,9 @@ library("snpStats")
 library("ggfortify")
 library("doParallel")
 
-source("software/GWASfunction.R")
+source("../software/GWASfunction.R")
 
-setwd("~/Dropbox/cursos/laval2019/GWAS/")
-load("steps/genData_binary.RData")
+load("genData_binary.RData")
 ```
 
 ## GWAS

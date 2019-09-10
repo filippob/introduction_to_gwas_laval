@@ -7,8 +7,8 @@ output: html_document
 
 ```{r setup, include=FALSE}
 ### KINSHIP matrix
-source("~/Dropbox/cursos/laval2019/GWAS/software/gwas.r")
-source("~/Dropbox/cursos/laval2019/GWAS/software/emma.r")
+source("../software/gwas.r")
+source("..//software/emma.r")
 
 library("qqman")
 library("gMatrix") ## own-made package
@@ -17,11 +17,11 @@ library("gMatrix") ## own-made package
 ### Prepare the data
 
 ```{r, echo=TRUE}
-snpMatrix <- read.table("steps/rice_imputed.raw", header = TRUE)
-SNP_INFO <- read.table("steps/rice_imputed.map")
+snpMatrix <- read.table("../3.imputation/rice_imputed.raw", header = TRUE)
+SNP_INFO <- read.table("../3.imputation/rice_imputed.map")
 names(SNP_INFO) <- c("Chr","SNP","cM","Pos")
 
-phenotypes <- read.table("../data/rice_phenotypes.txt", header = TRUE)
+phenotypes <- read.table("../../data/rice_phenotypes.txt", header = TRUE)
 phenotypes <- phenotypes[phenotypes$id %in% snpMatrix$IID,]
 ```
 
@@ -44,7 +44,7 @@ heatmap(K,col=rev(heat.colors(75)))
 ## GWAS with the kinship matrix to account for population structure
 
 ```{r, echo=FALSE}
-Y <- as.matrix(phenotypes$phenotype)
+Y <- as.matrix(phenotypes$PH)
 rownames(Y) <- phenotypes$id
 
 res <- amm_gwas(Y = Y, X = X, K = K, m = 1, use.SNP_INFO = TRUE)

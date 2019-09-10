@@ -28,10 +28,8 @@ From Wolf et al. @wolf2015genome, data on cleft lip (affected / unaffected) in d
 #### Genotypes
 
 ```{r data, echo=TRUE}
-setwd("~/Dropbox/cursos/laval2019/introduction_to_gwas/")
-
 ## Prepare data
-pathD <- paste("../imputation/dogs_imputed", c(".bed", ".bim", ".fam"), sep = "")
+pathD <- paste("../3.imputation/dogs_imputed", c(".bed", ".bim", ".fam"), sep = "")
 genotypes <- read.plink(pathD[1], pathD[2], pathD[3])
 
 map <- genotypes$map
@@ -45,7 +43,7 @@ N. **`r nrow(map)` SNPs** from **`r nrow(genotypes$genotypes)` dog samples**. SN
 ```{r, echo=TRUE}
 ## phenotypes
 phenotypes = read.table("../../data/dogs_phenotypes.txt", header = TRUE)
-names(phenotypes) <- c("id", "population", "condition", "sex")
+names(phenotypes) <- c("id", "population", "condition")
 ```
 
 Condition status (presence/absence of cleft lip) was recorded on `r nrow(phenotypes)` dog samples. Genotype records and phenotype records need in the first place to be aligned:
@@ -61,10 +59,10 @@ Data (both phenotypes and genotypes) are then saved to an object of class
 
 ```{r, echo=TRUE}
 genData = list(SNP=genotypes$genotypes, MAP=map, PHENOTYPES=phenotypes)
-save(genData, file = "steps/genData_binary.RData")
+save(genData, file = "genData_binary.RData")
 
 ### analysis
-load("steps/genData_binary.RData")
+load("genData_binary.RData")
 ```
 
 One breed, two phenotypic categories:

@@ -11,8 +11,8 @@ library("data.table")
 ## include common functions
 # source("~/Dropbox/cursos/laval2019/GWAS/software/gwas.r")
 # source("~/Dropbox/cursos/laval2019/GWAS/software/emma.r")
-source("~/filippo/introduction_to_gwas/software/gwas.r")
-source("~/filippo/introduction_to_gwas/software/emma.r")
+source("../software/gwas.r")
+source("../software/emma.r")
 
 ###################################
 ## read arguments from command line

@@ -63,7 +63,7 @@ We'll be using SNP genotype data from 12 samples genotyped with the "**GeneChip 
 A summary of the real missing rate in the data is given below:
 
 ```{r, echo=FALSE}
-rice44 <- read.table("~/Dropbox/cursos/laval2019/data/GenRiz44.txt",header=TRUE)
+rice44 <- read.table("../../data/GenRiz44.txt",header=TRUE)
 oldcode <- c("AA","BB","--")
 neucode <- c(-1,1,NA)
 
