@@ -6,8 +6,8 @@ library("knitr")
 library("dplyr")
 library("ggplot2")
 library("GenABEL")
+library("data.table")
 library("reshape2")
-setwd("~/Dropbox/cursos/berlin2018")
 
 
 ### own defined functions
@@ -22,22 +22,24 @@ qqPlot <- function(res) {
 }
 #########################
 
-# tPed = "data/sheep.tped"
-# tFam = "data/sheep.tfam"
-# phenotype_file = "data/pheno_genabel.dat"
+## NB : YOU FIRST NEED TO TRANSPOSE THE PED/MAP FILES (Plink)
 
-tPed = "data/rice.tped"
-tFam = "data/rice.tfam"
-phenotype_file = "data/phenotypes_rice.txt"
+pheno = fread("../data/rice_phenotypes.txt")
+pheno$sex <- rep(1,nrow(pheno))
+fwrite(x = pheno, file = "../data/rice_phenotypes_sex.txt", sep = "\t")
+
+tPed = "../data/rice.tped"
+tFam = "../data/rice.tfam"
+phenotype_file = "../data/rice_phenotypes_sex.txt"
   
 convert.snp.tped(tped=tPed,
                  tfam=tFam,
-                 out="data/rice.raw",
+                 out="../data/rice.raw",
                  strand="+")
 
 
 df <- load.gwaa.data(phe=phenotype_file, 
-                     gen="data/rice.raw",
+                     gen="../data/rice.raw",
                      force=TRUE
 )
 
@@ -63,7 +65,7 @@ gtdata(df1)@chromosome
 
 ## GWAS model without accounting for population structure
 
-data2.qt <- qtscore(phenotype, data = df1, trait="gaussian")
+data2.qt <- qtscore(PH, data = df1, trait="gaussian")
 lambda(data2.qt)
 plot(data2.qt, df="Pc1df",col = c("red", "slateblue"),pch = 19, cex = .5, main="trait")
 descriptives.scan(data2.qt,top=10)
@@ -78,7 +80,7 @@ qqPlot(res)
 
 
 ## Use of the kinship matrix to model population structure
-h2a <- polygenic(phenotype,data=df1,kin=K,trait.type = "gaussian")
+h2a <- polygenic(PH,data=df1,kin=K,trait.type = "gaussian")
 df.mm <- mmscore(h2a,df1)
 descriptives.scan(df.mm,top=100)
 plot(df.mm,col = c("red", "slateblue"),pch = 19, cex = .5, main="phenotype")
@@ -111,10 +113,15 @@ qqPlot(res)
 ## binary phenotype
 ###################
 
-setwd("~/Dropbox/cursos/laval2019/alternatives_to_GenABEL/data/")
-tPed = "dogs.tped"
-tFam = "dogs.tfam"
-phenotype_file = "pheno_dogs.txt"
+## NB : YOU FIRST NEED TO TRANSPOSE THE PED/MAP FILES (Plink)
+
+pheno = fread("../data/dogs_phenotypes.txt")
+pheno$sex <- rep(1,nrow(pheno))
+fwrite(x = pheno, file = "../data/dogs_phenotypes_sex.txt", sep = "\t")
+
+tPed = "../data/dogs.tped"
+tFam = "../data/dogs.tfam"
+phenotype_file = "../data/dogs_phenotypes_sex.txt"
 
 ## 
 # pp = read.table("pheno_dogs.txt", header = TRUE)
@@ -123,7 +130,7 @@ phenotype_file = "pheno_dogs.txt"
 
 convert.snp.tped(tped=tPed,
                  tfam=tFam,
-                 out="dogs.raw",
+                 out="../data/dogs.raw",
                  strand="+")
 
 
