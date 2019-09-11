@@ -21,4 +21,4 @@ scp -i GWAS2019.pem ubuntu@52.35.196.66:/home/ubuntu/filippo/introduction_to_gwa
 scp -i GWAS2019.pem ubuntu@52.35.196.66:/home/ubuntu/filippo/introduction_to_gwas/3.imputation/dogs_imputed.fam introduction_to_gwas/3.imputation/
 
 ## software (in case you don't already have it)
-scp -i GWAS2019.pem ubuntu@52.35.196.66:/home/ubuntu/filippo/introduction_to_gwas/software/dogs_imputed.fam introduction_to_gwas/software/
+scp -i GWAS2019.pem ubuntu@52.35.196.66:/home/ubuntu/filippo/introduction_to_gwas/software/GWASfunction.R introduction_to_gwas/software/
