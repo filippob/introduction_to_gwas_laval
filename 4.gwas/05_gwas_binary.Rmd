@@ -36,7 +36,7 @@ map <- genotypes$map
 colnames(map) <- c("chr", "SNP", "gen.dist", "position", "A1", "A2")
 ```
 
-N. **`r nrow(map)` SNPs** from **`r nrow(genotypes$genotypes)` dog samples**. SNPs are distributed over **`r length(unique(map$chr))` chromosomes** (chr: `r unique(map$chr)`); dog samples belong to **`r length(unique(genotypes$fam$pedigree))` population** (populations: `r unique(genotypes$fam$pedigree)`)
+N. **`r nrow(map)` SNPs** from **`r nrow(genotypes$genotypes)` dog samples**. SNPs are distributed over **`r length(unique(map$chr))` chromosomes** (chr: `r unique(map$chr)`)
 
 #### Phenotypes
 
@@ -55,7 +55,7 @@ phenotypes$condition <- as.factor(phenotypes$condition)
 phenotypes$id <- NULL
 ```
 
-Data (both phenotypes and genotypes) are then saved to an object of class
+Data (both phenotypes and genotypes) are then saved to a list and written out for next steps:
 
 ```{r, echo=TRUE}
 genData = list(SNP=genotypes$genotypes, MAP=map, PHENOTYPES=phenotypes)
@@ -126,7 +126,6 @@ Sys.time() - start # benchmark
 
 ```{r, echo=TRUE}
 GWASout <- read.table(paste(target, ".txt", sep = ""), header = T, colClasses = c("character", rep("numeric",4)), dec=".")
-GWASout$type <- rep("typed", nrow(GWASout))
 GWASout$Neg_logP <- -log10(GWASout$p.value)
 GWASout <- merge(GWASout, genData$MAP[,c("SNP", "chr", "position")])
 GWASout <- GWASout[order(GWASout$Neg_logP, decreasing = T),]

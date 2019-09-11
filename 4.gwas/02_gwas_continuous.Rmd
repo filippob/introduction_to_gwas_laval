@@ -16,7 +16,8 @@ library("qqman")
 library("dplyr")
 library("ggplot2")
 library("snpStats")
-# library("doParallel")
+library("data.table")
+library("doParallel")
 
 source("../software/GWASfunction.R")
 
@@ -124,6 +125,10 @@ phenodata <- data.frame("id" = rownames(genData$PHENOTYPES),
 trait_type = "gaussian"
 ```
 
+```{r, echo=TRUE}
+kable(head(phenodata))
+```
+
 ### Execution
 
 ```{r, echo=TRUE, warning=FALSE, message=FALSE}
@@ -136,8 +141,8 @@ Sys.time() - start # benchmark
 ### Results
 
 ```{r, echo=TRUE}
-GWASout <- read.table(paste(target, ".txt", sep = ""), header = T, colClasses = c("character", rep("numeric",4)), dec=".")
-GWASout$type <- rep("typed", nrow(GWASout))
+GWASout <- read.table(paste(target, ".txt", sep = ""), header = T, colClasses = c("character", rep("numeric",4)))
+# GWASout$type <- rep("typed", nrow(GWASout))
 GWASout$Neg_logP <- -log10(GWASout$p.value)
 GWASout <- merge(GWASout, genData$MAP[,c("SNP", "chr", "position")])
 GWASout <- GWASout[order(GWASout$Neg_logP, decreasing = T),]
