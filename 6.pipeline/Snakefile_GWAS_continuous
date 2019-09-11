@@ -10,7 +10,7 @@ rule filter_genotypes:
         outped = "steps/rice_filtered.ped",
         outmap = "steps/rice_filtered.map"
     run:
-        shell("~/Downloads/plink --ped {input.pedfile} --map {input.mapfile} --geno 0.05 --mind 0.2 --maf 0.05 --recode --out steps/rice_filtered")
+        shell("plink --ped {input.pedfile} --map {input.mapfile} --geno 0.05 --mind 0.2 --maf 0.05 --recode --out steps/rice_filtered")
 
 rule ped2vcf:
     input:
@@ -19,7 +19,7 @@ rule ped2vcf:
     output:
         "steps/rice_filtered.vcf"
     shell:
-        "~/Downloads/plink --file steps/rice_filtered --recode vcf --out steps/rice_filtered"
+        "plink --file steps/rice_filtered --recode vcf --out steps/rice_filtered"
 
 rule impute_genotypes:
     input:
@@ -27,7 +27,7 @@ rule impute_genotypes:
     output:
         "steps/rice_imputed.vcf.gz"
     shell:
-        "java -Xss5m -Xmx4g -jar ~/Documents/beagle4.1/beagle.27Jan18.7e1.jar gt=steps/rice_filtered.vcf out=steps/rice_imputed"
+        "beagle gt=steps/rice_filtered.vcf out=steps/rice_imputed"
 
 rule vcf2ped:
     input:
@@ -36,7 +36,7 @@ rule vcf2ped:
         "steps/rice_imputed.ped",
 	"steps/rice_imputed.map"
     shell:
-        "~/Downloads/plink --vcf steps/rice_imputed.vcf.gz --recode --out steps/rice_imputed"
+        "plink --vcf steps/rice_imputed.vcf.gz --recode --out steps/rice_imputed"
 
 rule plink_recodeA:
     input:
@@ -45,7 +45,7 @@ rule plink_recodeA:
     output:
         "steps/rice_imputed.raw"
     shell:
-        "~/Downloads/plink --file steps/rice_imputed --recode A --out steps/rice_imputed"
+        "plink --file steps/rice_imputed --recode A --out steps/rice_imputed"
 
 rule gwas_kinship:
     input:
@@ -59,7 +59,7 @@ rule gwas_kinship:
         trait = "phenotype",
         trait_label = "PH"
     shell:
-        "Rscript --vanilla {input.script} \
+        "/home/ubuntu/miniconda3/envs/snake/bin/Rscript --vanilla {input.script} \
             genotype_file={input.genotype} \
             snp_map={input.map} \
             phenotype_file={input.phenotype} \

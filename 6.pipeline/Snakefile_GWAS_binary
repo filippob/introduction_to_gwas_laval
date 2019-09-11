@@ -60,7 +60,7 @@ rule gwas_kinship:
         trait = "phenotype",
         trait_label = "disease"
     shell:
-        "Rscript --vanilla {input.script} \
+        "/home/ubuntu/miniconda3/envs/snake/bin/Rscript --vanilla {input.script} \
             genotype_file={input.genotype} \
             snp_map={input.map} \
             phenotype_file={input.phenotype} \
