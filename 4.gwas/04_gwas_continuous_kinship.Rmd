@@ -21,7 +21,7 @@ snpMatrix <- read.table("../3.imputation/rice_imputed.raw", header = TRUE)
 SNP_INFO <- read.table("../3.imputation/rice_imputed.map")
 names(SNP_INFO) <- c("Chr","SNP","cM","Pos")
 
-phenotypes <- read.table("../../data/rice_phenotypes.txt", header = TRUE)
+phenotypes <- read.table("../data/rice_phenotypes.txt", header = TRUE)
 phenotypes <- phenotypes[phenotypes$id %in% snpMatrix$IID,]
 ```
 

@@ -25,7 +25,7 @@ In a continuos trait, one first looks at summary statistics: average value, stan
 
 ```{r cars, echo=FALSE}
 ### Continuous trait
-pheno_continuous <- read.table("../../data/rice_phenotypes.txt", header = TRUE)
+pheno_continuous <- read.table("../data/rice_phenotypes.txt", header = TRUE)
 names(pheno_continuous)[3] <- "phenotype"
 
 D <- pheno_continuous %>%
@@ -89,7 +89,7 @@ For instance, the distribution of cases and controls overall and per covariable 
 Here we see we have three classes: one is unknown status, which we will remove when filtering phenotypic data before GWAS.
 
 ```{r binary, echo=FALSE}
-pheno_binary <- read.table("../../data/dogs_phenotypes.txt", header = TRUE)
+pheno_binary <- read.table("../data/dogs_phenotypes.txt", header = TRUE)
 
 D <- pheno_binary %>%
   group_by(family, phenotype) %>%

@@ -42,7 +42,7 @@ N. **`r nrow(map)` SNPs** from **`r nrow(genotypes$genotypes)` dog samples**. SN
 
 ```{r, echo=TRUE}
 ## phenotypes
-phenotypes = read.table("../../data/dogs_phenotypes.txt", header = TRUE)
+phenotypes = read.table("../data/dogs_phenotypes.txt", header = TRUE)
 names(phenotypes) <- c("id", "population", "condition")
 ```
 

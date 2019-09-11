@@ -56,7 +56,7 @@ N. **`r nrow(map)` SNPs** from **`r nrow(genotypes$genotypes)` rice samples**. S
 
 ```{r, echo=TRUE}
 ## phenotypes
-phenotypes = read.table("../../data/rice_phenotypes.txt", header = TRUE)
+phenotypes = read.table("../data/rice_phenotypes.txt", header = TRUE)
 names(phenotypes) <- c("id", "population", "PH")
 ```
 
