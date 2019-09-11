@@ -55,6 +55,10 @@ pre-processing/*.map
 *.vcf
 *.vcf.gz
 
+# other files
+*/*.kinship
+*/*.results
+
 data/*
 *.log
 *.map
