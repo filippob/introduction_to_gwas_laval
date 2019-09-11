@@ -119,6 +119,8 @@ pheno = fread("../data/dogs_phenotypes.txt")
 pheno$sex <- rep(1,nrow(pheno))
 fwrite(x = pheno, file = "../data/dogs_phenotypes_sex.txt", sep = "\t")
 
+# tPed = "../../alternatives_to_GenABEL/data/dogs.tped"
+# tFam = "../../alternatives_to_GenABEL/data/dogs.tfam"
 tPed = "../data/dogs.tped"
 tFam = "../data/dogs.tfam"
 phenotype_file = "../data/dogs_phenotypes_sex.txt"
@@ -133,9 +135,8 @@ convert.snp.tped(tped=tPed,
                  out="../data/dogs.raw",
                  strand="+")
 
-
 df <- load.gwaa.data(phe=phenotype_file, 
-                     gen="dogs.raw",
+                     gen="../data/dogs.raw",
                      force=TRUE
 )
 
