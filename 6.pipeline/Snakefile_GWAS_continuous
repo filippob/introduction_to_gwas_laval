@@ -65,4 +65,3 @@ rule gwas_kinship:
             phenotype_file={input.phenotype} \
             trait={params.trait} \
             trait_label={params.trait_label}"
-
