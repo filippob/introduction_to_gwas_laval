@@ -4,8 +4,6 @@
 
 ## prepare data for gwas.R
 plink --file rice_imputed --recode A --out rice_imputed
-plink --file rice_imputed --recode A --out rice_imputed
-
 plink --dog --file dogs_imputed --recode A --out dog_imputed
 
 
