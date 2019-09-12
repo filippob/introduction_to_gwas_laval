@@ -80,3 +80,4 @@ data/*
 *.frq.cc
 *.RData
 *.csv
+6.pipeline/*
