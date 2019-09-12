@@ -56,7 +56,7 @@ rule gwas_kinship:
     output:
         "rice_imputed.raw_PH_GWAS.results"
     params:
-        trait = "phenotype",
+        trait = "PH",
         trait_label = "PH"
     shell:
         "/home/ubuntu/miniconda3/envs/snake/bin/Rscript --vanilla {input.script} \
