@@ -14,3 +14,13 @@ timetable: [here](https://docs.google.com/spreadsheets/d/18dEsNgz_Co91pn1CRX-NCN
 
 4. Data pre-processing: [here](https://docs.google.com/presentation/d/1BcqMUKQ1vg1lIsYbwoiOXVSNuTSClUCzT6o8Jp8EwXo/edit?usp=sharing)
 5. Imputation of missing genotypes: [here](https://docs.google.com/presentation/d/1bFIpBOWHs8VZ5D16HFxYJp15MuXWdkzfUeroY7SPXNg/edit?usp=sharing)
+
+*day 3*
+
+6. GWAS, background and examples: [here](https://docs.google.com/presentation/d/1SRc0MlL-x0QeT-FtASK8qLebfedQkhRkHJjdXXN_b8c/edit?usp=sharing)
+7. GWAS, the basic models: [here](https://docs.google.com/presentation/d/18ReHI4KXsPz74q0hWs5Bs7t6nRWTNHZ8XcQkmqsl2XA/edit?usp=sharing)
+
+*day 4*
+
+8. A bioinformatic pipeline for GWAS: [here](https://docs.google.com/presentation/d/1pqPsDqqxascrpkdnCmU9GeJT8gNhsiewLHF-lsKuzCs/edit?usp=sharing)
+9. Assignment : [here](https://docs.google.com/presentation/d/1zkb9zB-DnQb4ZkRc2m0H13HSISoXhGoJDq3Rk9Bhttg/edit?usp=sharing) 
