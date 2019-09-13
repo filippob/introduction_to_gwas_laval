@@ -9,4 +9,5 @@ cp -r ../data/{dogs,rice,parus}.{ped,map} data
 cp -r ../data/{dogs,rice,parus}_phenotypes.txt data
 
 ## dry run
+snakemake --dag -s Snakefile_GWAS_parus | dot -Tsvg > graph.svg
 snakemake -s Snakefile_GWAS_parus

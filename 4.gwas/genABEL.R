@@ -96,7 +96,7 @@ qqPlot(res)
 
 ## Use of principal components to model population structure
 
-df.mm  <- egscore(phdata(df1)$phenotype,data=df1,kin=K)
+df.mm  <- egscore(phdata(df1)$PH,data=df1,kin=K)
 plot(df.mm,col = c("red", "slateblue"),pch = 19, cex = .5, main="trait")
 descriptives.scan(df.mm,top=10)
 
