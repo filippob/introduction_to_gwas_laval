@@ -6,6 +6,7 @@
 ## libraries
 library("qqman")
 library("gMatrix")
+library("svglite")
 library("data.table")
 
 ## include common functions
@@ -42,6 +43,12 @@ for (p in args){
   #if we get here, is an unknown parameter
   stop(paste('bad parameter:', pieces[1]))
 }
+
+# genotype_file = "../6.pipeline/steps/bracco_imputed.raw"
+# snp_map = "../6.pipeline/steps/bracco_imputed.map"
+# phenotype_file = "../data/bracco_phenotypes.txt"
+# trait = "game"
+# trait_label = "game"
 
 print(paste("genotype file name:",genotype_file))
 print(paste("SNP map:",snp_map))
@@ -80,7 +87,17 @@ X <- as.matrix(snpMatrix[,-c(1:6)])
 colnames(X) <- gsub("\\_[A-Z]{1}$","",colnames(X))
 rownames(X) <- snpMatrix$IID
 
-K <- gVanRaden(X)
+K <- gVanRaden.2(X)
+
+## reading external kinship matrix
+# k <- fread("../6.pipeline/steps/bracco_imputed.rel")
+# ids <- fread("../6.pipeline/steps/bracco_imputed.rel.id", header = FALSE)
+# k <- as.matrix(k)
+# colnames(k) <- ids$V1
+# rownames(k) <- ids$V1
+
+vec <- colnames(K) %in% phenotypes$id
+K <- K[vec,vec]
 
 print("writing out the kinship matrix ...")
 fname = paste(dataset,".kinship",sep="")
@@ -110,13 +127,26 @@ names(gwasResults) <- c("SNP","CHR","BP","P")
 fname <- paste(dataset,trait_label,"GWAS.results", sep="_")
 fwrite(x = gwasResults, file = fname)
 
-pdf(paste(dataset,trait_label,"manhattan.pdf",sep="_"))
+# pdf(paste(dataset,trait_label,"manhattan.pdf",sep="_"), width = 6, height = 4)
+# manhattan(gwasResults, suggestiveline = FALSE, col = c("red","blue"))
+# dev.off()
+
+# svglite::svglite(paste(dataset,trait_label,"manhattan.svg",sep="_"), width = 8, height = 6, pointsize = 2)
+# manhattan(gwasResults, suggestiveline = FALSE, col = c("red","blue"))
+# dev.off()
+
+png(paste(dataset,trait_label,"manhattan.png",sep="_"), width = 800, height = 600, res = 100)
 manhattan(gwasResults, suggestiveline = FALSE, col = c("red","blue"))
 dev.off()
 
-pdf(paste(dataset,trait_label,"qqplot.pdf",sep="_"))
+# pdf(paste(dataset,trait_label,"qqplot.pdf",sep="_"), width = 8, height = 8, pointsize = 2)
+# qq(gwasResults$P)
+# dev.off()
+
+png(paste(dataset,trait_label,"qqplot.png",sep="_"), width = 600, height = 600)
 qq(gwasResults$P)
 dev.off()
+
 
 print("#########")
 print("## END ##")
